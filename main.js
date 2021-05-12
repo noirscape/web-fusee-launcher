@@ -117,6 +117,10 @@ document.getElementById("goButton").addEventListener("click", async () => {
     payload = fusee;
   } else if (payloadType === "hekate.bin") {
     payload = hekate;
+  } else if (payloadType === "tegraexplorer.bin") {
+    payload = tegraexplorer;
+  } else if (payloadType === "lockpick.bin") {
+    payload = lockpick;
   } else if (payloadType === "uploaded") {
     const file = document.getElementById("payloadUpload").files[0];
     if (!file) {
