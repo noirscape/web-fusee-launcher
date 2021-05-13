@@ -1,6 +1,7 @@
 import requests
 import io
 import shutil
+import os
 import zipfile
 
 bin_files = {
@@ -98,7 +99,7 @@ def serialize_to_js(short_name: str, payload: io.BytesIO, filename: str):
     final_str = "".join(final_str)
 
     out_string = DEFAULT_SERIALIZED_CONTENTS.format(short_name, final_str)
-    with open(filename, "w") as outfile:
+    with open(f"site/{filename}", "w") as outfile:
         outfile.write(out_string)
 
 def generate_js(program: str):
@@ -130,14 +131,17 @@ def generate_html():
 
 
     out_string = "".join(html_data_list)
-    with open("index.html", "w") as indexfile:
+    with open("site/index.html", "w") as indexfile:
         indexfile.write(out_string)
 
 def main():
+    os.makedirs("site", exist_ok=True)
     generate_js("hekate")
     generate_js("tegraexplorer")
     generate_js("lockpick")
     generate_html()
+    shutil.copy("js/main.js", "site/main.js")
+    shutil.copy("js/fusee.bin.js", "site/fusee.bin.js")
 
 if __name__ == "__main__":
     main()
