@@ -60,11 +60,6 @@ def extract_specific_file_from_zip(zip_file, bin_name) -> io.BytesIO:
     filedata.seek(0)
     return filedata
 
-def fetch_hekate_zip(api_url) -> io.BytesIO:
-    r = requests.get(api_url)
-    jdata = r.json()
-    return download_file_to_bytes_io([d for d in jdata["assets"] if d["name"].startswith("hekate_ctcaer")][0]["browser_download_url"])
-
 def fetch_github_repo_file(api_url, filename) -> io.BytesIO:
     r = requests.get(api_url)
     jdata = r.json()
